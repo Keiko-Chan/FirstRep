@@ -54,7 +54,6 @@ int Solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
     }
 
 int main()
-
   {
   printf( " Solution of a quadratic equation \n " );
   printf( " Enter a, b, c \n " );
