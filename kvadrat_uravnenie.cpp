@@ -7,30 +7,22 @@
 #include<stdio.h>
 #include<math.h>
 
-const float pogr = 1e-5;
+const float bias = 1e-5;
 
-//--------------------------------------------------------------------------------
+void test_solve(  );
 
-void Tes_Solve(  );
-
-//-------------------------------------------------------------------------------
-
-void Test_isZero();
-
-//---------------------------------------------------------------------------------
+void test_isZero();
 
 int isZero( double Value );
 
-//---------------------------------------------------------------------------------
-
-int Solve_of_qua_equ( double a, double b, double c, double* x1, double* x2);
+int solve_of_qua_equ( double a, double b, double c, double* x1, double* x2);
 
 //----------------------------------------------------------------------------------
 
 int main()
   {
-  Test_isZero();
-  Tes_Solve(  );
+  test_isZero();
+  test_solve();
 
   printf( " Solution of a quadratic equation \n " );
   printf( " Enter a, b, c \n " );
@@ -41,7 +33,7 @@ int main()
 
   scanf( "%lg%lg%lg", &a, &b, &c );
 
-  nroots = Solve_of_qua_equ( a, b, c, &x1, &x2);
+  nroots = solve_of_qua_equ( a, b, c, &x1, &x2);
 
   switch( nroots )
     {
@@ -76,7 +68,7 @@ int main()
 
 //---------------------------------------------------------------------------------------------------
 
-int Solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
+int solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
    {
    double Discr = 0;                       //discriminant of quadratic equation
    double Nroots = 0;                      //number of roots of quadratic equation
@@ -127,13 +119,13 @@ int Solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
 int isZero( double Value )
   {
 
-  return ( fabs( Value ) < pogr ) ;
+  return ( fabs( Value ) < bias ) ;
 
   }
 
 //-----------------------------------------------------------------------------------------
 
-void Test_isZero()
+void test_isZero()
   {
   if( isZero( 0 ) == 1 )   printf( "  Test one Yes \n " );
   else                     printf( " Test one No: result = %d, should be 1\n ", isZero( 0 ) );
@@ -141,21 +133,21 @@ void Test_isZero()
   if( isZero( 1 ) == 0 )   printf( " Test two Yes \n " );
   else                     printf( " Test two No: result = %d, should be 0 \n ", isZero( 1 ) );
 
-  if( isZero( pogr ) == 0) printf( " Test third Yes \n " );
-  else                     printf( " Test third No: result = %d, should be 0 \n ", isZero( pogr ) );
+  if( isZero( bias ) == 0) printf( " Test third Yes \n " );
+  else                     printf( " Test third No: result = %d, should be 0 \n ", isZero( bias ) );
   }
 
 //------------------------------------------------------------------------------------------------
 
-void Tes_Solve(  )
+void test_solve(  )
   {
   double x1 = 0, x2 = 0;
 
-  if( Solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) == -1 ) printf( " Test one Yes \n " );
-  else                                              printf( " Test one No: error infinite number of roots, result = %d \n ",Solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) );
+  if( solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) == -1 ) printf( " Test one Yes \n " );
+  else                                              printf( " Test one No: error infinite number of roots, result = %d \n ",solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) );
 
-  if( Solve_of_qua_equ( 0, 0, 1, &x1, &x2 ) == 0 )  printf( " Test two yes \n " );
-  else                                              printf( " Test two No: no roots, but result = %d \n ",Solve_of_qua_equ( 0, 0, 1, &x1, &x2 ) );
+  if( solve_of_qua_equ( 0, 0, 1, &x1, &x2 ) == 0 )  printf( " Test two yes \n " );
+  else                                              printf( " Test two No: no roots, but result = %d \n ",solve_of_qua_equ( 0, 0, 1, &x1, &x2 ) );
 
   }
 
