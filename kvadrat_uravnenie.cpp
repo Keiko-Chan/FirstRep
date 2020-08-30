@@ -8,8 +8,9 @@
 #include <math.h>
 
 const float bias = 1e-5;
+const int INF_ROOTS = -1;
 
-void test_solve(  );
+void test_solve();
 
 void test_is_zero();
 
@@ -58,7 +59,7 @@ int main()
       printf( "The equation has two solutions \n x1 = %lg x2 = %lg", x1, x2 );
       break;
 
-    case -1:
+    case INF_ROOTS:
       printf("The equation has infinite number of roots" );
       break;
 
@@ -72,8 +73,8 @@ int main()
 
 int solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
    {
-   double Discr = 0;                       //discriminant of quadratic equation
-   double Nroots = 0;                      //number of roots of quadratic equation
+   double Discr = 0;                              //discriminant of quadratic equation
+   double Nroots = 0;                             //number of roots of quadratic equation
 
    assert( *x1 != NULL );
    assert( *x2 != NULL );
@@ -82,19 +83,19 @@ int solve_of_qua_equ( double a, double b, double c, double* x1, double* x2)
       {
       if( is_zero( b ) )
         {
-        if( is_zero( c ) )  return -1;      //a = 0 && b = 0 && c = 0
+        if( is_zero( c ) )  return INF_ROOTS;      //a = 0 && b = 0 && c = 0
 
-        else               return 0;       //a = 0 && b = 0 && c != 0
+        else                return 0;              //a = 0 && b = 0 && c != 0
         }
 
-      else                                 //a = 0 && b != 0
+      else                                         //a = 0 && b != 0
         {
         *x1 = *x2 = -c/b;
         return 1;
         }
       }
 
-    else                                   //a != 0
+    else                                            //a != 0
       {
       Discr = b * b - 4 * a * c;
 
@@ -141,7 +142,7 @@ void test_solve(  )
   double x1 = 0;
   double x2 = 0;
 
-  if( solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) == -1 ) printf( "Test one Yes \n" );
+  if( solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) == INF_ROOTS ) printf( "Test one Yes \n" );
   else                                              printf( "Test one No: error infinite number of roots, result = %d \n",solve_of_qua_equ( 0, 0, 0, &x1, &x2 ) );
 
   if( solve_of_qua_equ( 0, 0, 1, &x1, &x2 ) == 0 )  printf( "Test two yes \n " );
